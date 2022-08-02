@@ -1,40 +1,24 @@
-##' Download MODIS NDVI data
-##' @param URL  web address where data is located
+##' Plot NDVI data
 ##'
-## 1) How I really did it. For the prac we'll use option 2 because it's faster
-## library("MODISTools") #Call R library MODISTools that allows us to download MODIS satellite data directly into R
-##
-## ndvi <- mt_subset(product = "MOD13Q1",
-##                         lat = -34.100875,
-##                         lon = 18.449375,
-##                         band = "250m_16_days_NDVI",
-##                         start = "2000-01-01",
-##                         end = "2021-10-01",
-##                         progress = FALSE)
-##
-
-## 2) How we'll do it for the prac: Read the data from a .csv file in my github repository for the course notes
-##
-download.NDVI <- function(URL) {
+##' @param dat  dataframe that contains columns "age" and "NDVI"
+##' @param fit  a fitted model to overlay on the data if present
+##' @param ...  additional graphing parameters
+##'
+plot.NDVI <- function(dat, fit = NA, ...){
   
-  # Wrap function in an if/else loop that checks if the URL is valid
-  if (length(URL) == 1 & is.character(URL) & substr(URL,1,4)=="http") {
+  if(!is.null(dat)){ # Begin if/else statement
     
-    # Read in data
-    modat <- read.csv(URL)
+    # Base plot of the data points 
+    plot(dat$age, dat$NDVI, ylab = "NDVI", xlab = "Postfire age (Years)")
     
-    # Convert Digital Numbers (more efficient for data storage) to NDVI
-    modat$NDVI <- modat$value*0.0001
-    
-    # Convert calendar_date to class "Date"
-    modat$calendar_date <- as.Date(as.character(modat$calendar_date))
-    
-    # Return the data
-    return(modat)
+    if(!is.na(fit[1])){ #Begin inner if statement
+      
+      # Overlay the fitted model on the plot
+      lines(dat$age, predict(fit, list(x = dat$age)), col = 'skyblue', lwd = 3)
+      
+    } # End inner if statement
     
   } else {
-    
-    # If the URL is not valid return...
-    print(paste("download.NDVI: Input URL not provided correctly",URL))
-  }
+    print("plot.NDVI: input data not provided or invalid")
+  } # End if/else statement
 }
