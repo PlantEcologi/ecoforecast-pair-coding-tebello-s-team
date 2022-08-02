@@ -28,7 +28,7 @@ fit.negexp.MLE <- function(dat,par){
   optim(par, fn = lnL.negexp, dat=dat, control = list(maxit = 1000))
 }
 
-##########################################
+########################################
 
 ##' 2) Fit negative exponential plus mystery term using maximun likelihood estimation
 ##' Function (a) to define the FULL model using MLE:
