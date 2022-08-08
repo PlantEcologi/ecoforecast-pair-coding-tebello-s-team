@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE) 
 ```
 
 ### 1. Source functions, get data and plot
@@ -32,7 +32,7 @@ plot.NDVI(dat)
 
 Q1: This plot suggests that Fynbos greenness (NDVI) as observed from satellite saturates with time since fire. Why do you think it saturates rather than increasing linearly with time?
 
->*Answer 1:*
+>*Answer 1: It is because no new plants are growing. If it were increasing linearly through time, it would mean new greenness is being introduced, however, in this case the same type of greenness is being recorded.*
 
 <br>
 
@@ -99,7 +99,7 @@ Lots more parameters...
 
 Q2: How do the estimates for the common parameters compare?
 
->*Answer 2:*
+>*Answer 2: the estimates of the common parameters in model 2, except for the gamma parameter, are smaller than model 2.*
 
 <br>
 
@@ -117,11 +117,11 @@ anova(fit_negexp, fit_negexpS)
 
 Q3: Which model is better?
 
->*Answer 3:*
+>*Answer 3: Model 2. the residual sum is squares is significantly smaller than that of Model 1. Therefore, Model 2 explains more variation than Model 1.The p-value <0.05 and therefore, Model 2 is significantly more fit for the data than Model 1*
 
 Q4: How many degrees of freedom are there in this ANOVA and why (i.e. what are they)?
 
->*Answer 4:*
+>*Answer 4: there are 2 degrees of freedom. The anova is comparing 2 models with different numbers of parameters. Therefore, Model 2 has two more parameters than Model 1. Because of this, the residual degrees of freedom for the 2 model, is 2 less than that of model 1*
 
 <br>
 
@@ -214,7 +214,7 @@ AIC_simple - AIC_full
 
 Q5: Is there a preferred model and if so, which one?
 
->*Answer 5:*
+>*Answer 5:the full model is preferred. The full model has a smaller AIC relative to the simple model. The difference is greater than 3, therefore, the models are significantly different from one another.*
 
 <br>
 
@@ -232,6 +232,6 @@ You'll notice that these are completely different to the AICs for the MLE models
 
 Q6: Why is it not okay to compare the AIC of these NLS models with the AIC of the MLE models? Hint: type `?AIC` into the R console and do some reading.
 
->*Answer 6:*
+>*Answer 6:The MLE models have their log-likelihood maximised while the NLS do not. This means that the data being compared is not on the same scale for comparison to be valid.*
 
 <br>
